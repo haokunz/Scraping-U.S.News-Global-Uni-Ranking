@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import pandas as pd
 
+
 def Read(url):
     opener = urllib.request.build_opener()
     opener.addheaders = [('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0')]
@@ -13,8 +14,8 @@ def Read(url):
 
 items, rankings, universities, locations = [], [], [], []
 
-for i in range(125): #There are 125 pages for 1250 universities in the 2020 edition
-    url = 'https://www.usnews.com/education/best-global-universities/rankings?page=' + str(i+1)
+for i in range(246): #There are 246 pages for 2460 universities in the 2024 edition
+    url = 'https://www.usnews.com/education/best-global-universities/rankings?page=' + str(i+1) 
     html = Read(url).decode('utf-8')
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -35,3 +36,5 @@ items.append(locations)
 item = ['Ranking', 'University', 'Location']
 data = pd.DataFrame(index=item, data=items)
 data.T.to_csv('USNews_global_ranking.csv', encoding='utf-8')
+
+
